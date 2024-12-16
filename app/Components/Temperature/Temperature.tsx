@@ -1,7 +1,7 @@
 "use client";
 import { useGlobalContext } from '@/app/context/globalContext';
 import { kelvinToCelsius } from '@/app/utils/misc';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     clearSky,
     cloudy,
@@ -10,6 +10,7 @@ import {
     rain,
     snow,
   } from "@/app/utils/Icons";
+import moment from 'moment';
 
 
 function Temperature() {
@@ -50,13 +51,44 @@ function Temperature() {
         }
     };
 
+    // live time update
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const localMoment = moment().utcOffset(timezone /60);
+            // custom format : 24 hour format
+            const formatedTime = localMoment.format("HH:mm:ss");
+            // day of the week
+            const day = localMoment.format("dddd");
+            setLocalTime(formatedTime);
+            setCurrentDay(day);
+        })
+    })
+
   return (
-    <div className='pt-6 pb-5 border rounded-lg flex flex-col 
+    <div className='pt-6 pb-5 px-4 border rounded-lg flex flex-col 
     justify-between dark:bg-dark-grey shadow-sm dark:shadow-none'>
       <p className='flex justify-between items-center'>
         <span className='font-medium'>{currentDay}</span>
         <span className='font-medium'>{localTime}</span>
       </p>
+      <p className='pt-2 font-bold flex gap-1'>
+        <span>{name}</span>
+        <span>{navigation}</span>
+      </p>
+      <p className='py-10 text-9xl font-bold self-center'>{temp}°</p>
+
+      <div>
+        <div>
+            <span>
+                {getIcon()}
+            </span>
+            <p className='pt-2 capitalize text-lg font-medium'>{description}</p>
+        </div>
+        <p className='flex items-center gap-2'>
+            <span>Low: {minTemp}°</span> 
+            <span>High: {maxTemp}°</span>
+        </p>
+      </div>
     </div>
   )
 }
