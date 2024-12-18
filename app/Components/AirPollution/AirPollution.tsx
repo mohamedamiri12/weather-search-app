@@ -31,7 +31,7 @@ function AirPollution() {
 
     console.log(filteredIndex)
 
-    return <div className="air-pollution col-span-full sm-2:col-span-2 pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 dark:bg-dark-grey shadow-sm dark:shadow-none">
+    return <div className="air-pollution  pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 dark:bg-dark-grey shadow-sm dark:shadow-none col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-2">
         <h2 className="flex items-center gap-2 font-medium">
             {thermo}Air Pollution
         </h2>
@@ -40,7 +40,7 @@ function AirPollution() {
             max={100} 
             className="progress" 
         />
-        <p>Air quality is {filteredIndex?.description}.</p>
+        <p className="text-sm">Air quality is {filteredIndex?.description}.</p>
     </div>
   
 }
