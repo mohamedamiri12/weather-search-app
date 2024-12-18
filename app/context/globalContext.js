@@ -1,8 +1,7 @@
-'use Client'
+"use client"
 
 
-import { createContext, useEffect } from "react"
-import { useContext , useState} from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import axios from "axios";
 
 
