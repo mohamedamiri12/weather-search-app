@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import { useGlobalContext } from "@/app/context/globalContext";
 
 function FlyToActiveCity({ activeCityCords }) {
@@ -25,7 +25,6 @@ function FlyToActiveCity({ activeCityCords }) {
   return null;
 }
 
-
 function Mapbox() {
   const { forecast } = useGlobalContext(); // Your coordinates
 
@@ -39,7 +38,6 @@ function Mapbox() {
     );
   }
 
-
   return (
     <div className="flex-1 basis-[50%] border rounded-lg">
       <MapContainer
@@ -47,12 +45,13 @@ function Mapbox() {
         zoom={13}
         scrollWheelZoom={false}
         className="rounded-lg m-4"
-        style={{ height: "calc(100%)", width: "calc(100%)" }}
+        style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
+
         <FlyToActiveCity activeCityCords={activeCityCords} />
       </MapContainer>
     </div>

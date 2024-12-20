@@ -1,5 +1,4 @@
-"use Client";
-import Image from "next/image";
+"use client";
 import AirPollution from "./Components/AirPollution/AirPollution";
 import Dailyforecast from "./Components/Dailyforecast/Dailyforecast";
 import FeelsLike from "./Components/FeelsLike/FeelsLike";
@@ -13,9 +12,11 @@ import Temperature from "./Components/Temperature/Temperature";
 import UvIndex from "./Components/UvIndex/UvIndex";
 import Visibility from "./Components/Visibility/Visibility";
 import Wind from "./Components/Wind/Wind";
-import { useGlobalContextUpdate } from "./context/globalContext";
 import defaultStates from "./utils/defaultStates";
 import FiveDayForecast from "./Components/FiveDayForecast/FiveDayForecast";
+import dynamic from "next/dynamic";
+const DynamicMap = dynamic(() => import("./Components/Mapbox/Mapbox"), { ssr: false });
+
 
 
 export default function Home() {
@@ -43,7 +44,7 @@ export default function Home() {
             <Pressure />
           </div>
           <div className="mapbox-con mt-4 flex gap-4">
-            <Mapbox />
+            <DynamicMap />
             <div className="states flex flex-col gap-3 flex-1">
               <h2 className="flex items-center gap-2 font-medium">
                 Top Large Cities
